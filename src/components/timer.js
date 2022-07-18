@@ -1,5 +1,6 @@
 import { toBePartiallyChecked } from '@testing-library/jest-dom/dist/matchers';
 import React, {Component} from 'react';
+import "./timer.css"
 export default class Timer extends Component {
     constructor(props) {
         super(props)
@@ -50,11 +51,11 @@ export default class Timer extends Component {
     }
  
     render() {
-        return (<div class="container">
-            <h1>{`${this.state.hours}:${this.state.minutes}:${this.state.seconds}` }</h1>
-            <button >Start</button>
-            <button>Pause</button>
-            <button>Stop</button>
+        return (
+        <div className="container">
+            <div className = "timer-box">
+                <h1 id="timer">{`00:00:00` }</h1>
+            </div>
         </div>);
     }
 }
