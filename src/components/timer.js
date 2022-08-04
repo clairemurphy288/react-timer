@@ -1,61 +1,33 @@
-import { toBePartiallyChecked } from '@testing-library/jest-dom/dist/matchers';
+import {useState, useEffect} from 'react';
 import React, {Component} from 'react';
 import "./timer.css"
-export default class Timer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            date: new Date(),
-            seconds: 0,
-            minutes: 0,
-            hours: 0,
-        }
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+export default function Timer(props) { 
+    const [date, setDate] = useState(Date.now());
+    const [task, setTask] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    function startTimer(e) {
+        console.log("timer started");
+        const date = new Date().toLocaleString();
+        console.log(date)
+        const dateInMili = Date.parse(date)
+        console.log(dateInMili);
+
     }
-    componentDidMount() {
-        this.timerID = setInterval(
-          () => this.tick(),
-          1000
-        );
-        this.minuteTime = setInterval(() => {
-            this.minutes()
-            
-        }, 60000);
-        this.hourTime = setInterval(() => {
-            this.hours()
-        }, 3600000 );
-      }
-    
-      componentWillUnmount() {
-        clearInterval(this.timerID);
-        clearInterval(this.minuteTime);
-        clearInterval(this.hourTime)
-      }
-    
-      tick() {    
-        this.setState({      
-            seconds: this.state.seconds + 1, 
-        });  
-    }
-    minutes() {
-        this.setState({
-            seconds: 0,
-            minutes: this.state.minutes + 1
-        })
-    }
-    hours() {
-        this.setState({
-            seconds: 0,
-            minutes: 0,
-            hours: this.state.hours + 1
-        })
-    }
- 
-    render() {
-        return (
-        <div className="container">
-            <div className = "timer-box">
-                <h1 id="timer">{`00:00:00` }</h1>
+
+    return (
+        <div onClick={startTimer} className="body">
+            <button className="btn btn-dark ">Start Timer</button>
+            <div className="container1">
+                <div className = "timer-box">
+                    <h1 id="timer">{`${hours}:${minutes}:${seconds}` }</h1>
+                    
+                </div>
+                
             </div>
         </div>);
-    }
+
 }
+ 
