@@ -1,10 +1,12 @@
-body {
+.body {
     background-color: #B8A8F0;
+    min-height: 100vh;
+    margin: auto;
 }
-.container {
+.container1 {
     display: flex;
-    width: 50%;
-    min-height: 75vh;
+    width: 60%;
+    min-height: 80vh;
     margin: auto;
     position: relative;
     justify-content: center;
@@ -30,7 +32,13 @@ h1 {
     background: #785be6;
     background: linear-gradient(321deg, rgba(120,91,230,1) 0%, rgba(164,126,236,1) 74%); 
     width: 75%;
-    bottom: 20%;
+    bottom: 25%;
     padding: 3% 2%;
     border-radius: 24px;
 }
+
+.btn-1 {
+    position: absolute;
+    bottom: 20%;
+    background-color: #785be6;
+} 
