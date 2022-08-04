@@ -4,6 +4,8 @@ import "./timer.css"
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 export default function Timer(props) { 
     const [date, setDate] = useState(new Date().toLocaleString());
+    const [ellapsed, setDelta] = useState(0);
+    const [paused, setPause] = useState(false);
     const [initialTime, setInitialTime] = useState(0);
     function startTimer(e) {
         const w = Date.now();
@@ -12,10 +14,12 @@ export default function Timer(props) {
     }
     useEffect(()=> {
         if(initialTime !== 0) {
-            setInterval(()=> {
+            var i = setInterval(()=> {
                 const currentTime = Date.now();
                 const delta = currentTime  - initialTime;
+                setDelta(delta);
                 setDate(msToTime(delta));
+                clearInterval(i);
     
             }, 1000)
 
@@ -23,12 +27,23 @@ export default function Timer(props) {
 
     },[initialTime]);
 
+    // useEffect(()=> {
+    //     if (paused === true && ellapsed != 0) {
+    //         var seconds = Math.floor((ellapsed/ 1000) % 60);
+    //         console.log(seconds);
+    //         setDate(date);
+
+    //     }
+    // }, [ellapsed])
+
     function pauseTimer(e) {
+        setPause(true);
         console.log("pause timer");
         //store the delta time 
 
     }
     function stopTimer(e) {
+        setPause(false);
         console.log("stop timer");
 
     }
