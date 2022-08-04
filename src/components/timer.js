@@ -5,9 +5,6 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 export default function Timer(props) { 
     const [date, setDate] = useState(new Date().toLocaleString());
     const [initialTime, setInitialTime] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
     function startTimer(e) {
         const w = Date.now();
         setInitialTime(w);
@@ -24,11 +21,24 @@ export default function Timer(props) {
 
         }
 
-    },[initialTime])
+    },[initialTime]);
+
+    function pauseTimer(e) {
+        console.log("pause timer");
+        //store the delta time 
+
+    }
+    function stopTimer(e) {
+        console.log("stop timer");
+
+    }
 
     return (
-        <div onClick={startTimer} className="body">
-            <button className="btn btn-dark ">Start Timer</button>
+        <div className="body">
+            <button onClick={startTimer}  className="btn btn-dark mx-1">Start</button>
+            <button onClick={pauseTimer} className="btn btn-dark mx-1">Pause</button>
+            <button onClick={stopTimer} className="btn btn-dark mx-1">Stop</button>
+
             <div className="container1">
                 <div className = "timer-box">
                     <h1 id="timer">{`${date}` }</h1>
