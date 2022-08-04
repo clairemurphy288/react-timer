@@ -5,8 +5,9 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 export default function Timer(props) { 
     const [date, setDate] = useState(new Date().toLocaleString());
     const [initialTime, setInitialTime] = useState(0);
-    const [pause, setPause] = useState("Pause")
+    const [pause, setPause] = useState("pause")
     const [interval, setNewInt] = useState(0);
+    const [deltaTime, setDelta] = useState(0);
     function startTimer(e) {
         const w = Date.now();
         setInitialTime(w);
@@ -29,10 +30,25 @@ export default function Timer(props) {
 
 
     function pauseTimer(e) {
-        setNewInt(clearInterval(interval));
+        if (pause === "pause") {
+            setNewInt(clearInterval(interval));
+            console.log("pause timer");
+            setPause("unpause");
 
-        console.log("pause timer");
+        } else if(pause === "unpause") {
+            setPause("pause")
 
+            
+            var i = setInterval(()=> {
+                const currentTime = Date.now();
+                const delta = (currentTime  - initialTime) + deltaTime;
+                setDelta(delta);
+                setDate(msToTime(delta));
+    
+            }, 1000);
+            setNewInt(i)
+            //set valid interval
+        }
     }
     function stopTimer(e) {
         console.log("stop timer");
@@ -41,9 +57,9 @@ export default function Timer(props) {
 
     return (
         <div className="body">
-            <button onClick={startTimer}  className="btn btn-dark mx-1">Start</button>
+            <button onClick={startTimer}  className="btn btn-dark mx-1">start</button>
             <button onClick={pauseTimer} className="btn btn-dark mx-1">{pause}</button>
-            <button onClick={stopTimer} className="btn btn-dark mx-1">Stop</button>
+            <button onClick={stopTimer} className="btn btn-dark mx-1">stop</button>
 
             <div className="container1">
                 <div className = "timer-box">
