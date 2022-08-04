@@ -4,9 +4,9 @@ import "./timer.css"
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 export default function Timer(props) { 
     const [date, setDate] = useState(new Date().toLocaleString());
-    const [ellapsed, setDelta] = useState(0);
-    const [paused, setPause] = useState(false);
     const [initialTime, setInitialTime] = useState(0);
+    const [pause, setPause] = useState("Pause")
+    const [interval, setNewInt] = useState(0);
     function startTimer(e) {
         const w = Date.now();
         setInitialTime(w);
@@ -17,33 +17,24 @@ export default function Timer(props) {
             var i = setInterval(()=> {
                 const currentTime = Date.now();
                 const delta = currentTime  - initialTime;
-                setDelta(delta);
                 setDate(msToTime(delta));
-                clearInterval(i);
     
-            }, 1000)
+            }, 1000);
+            setNewInt(i)
 
         }
 
     },[initialTime]);
 
-    // useEffect(()=> {
-    //     if (paused === true && ellapsed != 0) {
-    //         var seconds = Math.floor((ellapsed/ 1000) % 60);
-    //         console.log(seconds);
-    //         setDate(date);
 
-    //     }
-    // }, [ellapsed])
 
     function pauseTimer(e) {
-        setPause(true);
+        setNewInt(clearInterval(interval));
+
         console.log("pause timer");
-        //store the delta time 
 
     }
     function stopTimer(e) {
-        setPause(false);
         console.log("stop timer");
 
     }
@@ -51,7 +42,7 @@ export default function Timer(props) {
     return (
         <div className="body">
             <button onClick={startTimer}  className="btn btn-dark mx-1">Start</button>
-            <button onClick={pauseTimer} className="btn btn-dark mx-1">Pause</button>
+            <button onClick={pauseTimer} className="btn btn-dark mx-1">{pause}</button>
             <button onClick={stopTimer} className="btn btn-dark mx-1">Stop</button>
 
             <div className="container1">
