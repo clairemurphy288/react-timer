@@ -8,6 +8,7 @@ export default function Timer(props) {
     const [pause, setPause] = useState("pause")
     const [interval, setNewInt] = useState(0);
     const [deltaTime, setDelta] = useState(0);
+    const [placeholder, setPlaceholder] = useState(0);
     function startTimer(e) {
         const w = Date.now();
         setInitialTime(w);
@@ -18,6 +19,7 @@ export default function Timer(props) {
             var i = setInterval(()=> {
                 const currentTime = Date.now();
                 const delta = currentTime  - initialTime;
+                console.log(msToTime(delta));
                 setDate(msToTime(delta));
     
             }, 1000);
@@ -31,29 +33,47 @@ export default function Timer(props) {
 
     function pauseTimer(e) {
         if (pause === "pause") {
+            console.log("hiiii");
             setNewInt(clearInterval(interval));
             console.log("pause timer");
             setPause("unpause");
 
         } else if(pause === "unpause") {
             setPause("pause")
-
-            
-            var i = setInterval(()=> {
-                const currentTime = Date.now();
-                const delta = (currentTime  - initialTime) + deltaTime;
-                setDelta(delta);
-                setDate(msToTime(delta));
-    
-            }, 1000);
-            setNewInt(i)
-            //set valid interval
         }
     }
+
+    useEffect(()=> {
+        if(pause === "unpause" && interval === undefined) {
+            console.log("hiiiiiiiiiii")
+            console.log(msToTime(deltaTime))
+        } else if(pause === "pause" && interval === undefined) {
+            console.log("the intial time: " + initialTime);
+            console.log("the delta time: " + deltaTime);
+            setInitialTime(Date.now() - deltaTime);
+
+        }
+    },[pause]);
+
     function stopTimer(e) {
         console.log("stop timer");
 
     }
+    function msToTime(duration) {
+        setDelta(duration);
+        console.log(duration);
+        // const milliseconds = parseInt((duration % 1000) / 100);
+        var seconds = Math.floor((duration / 1000) % 60);
+        var minutes = Math.floor((duration / (1000 * 60)) % 60);
+        var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+        
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+      
+        return hours + ":" + minutes + ":" + seconds 
+      }
+     
 
     return (
         <div className="body">
@@ -71,16 +91,3 @@ export default function Timer(props) {
         </div>);
 
 }
-function msToTime(duration) {
-    // const milliseconds = parseInt((duration % 1000) / 100);
-    var seconds = Math.floor((duration / 1000) % 60);
-    var minutes = Math.floor((duration / (1000 * 60)) % 60);
-    var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-    
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-  
-    return hours + ":" + minutes + ":" + seconds 
-  }
- 
