@@ -33,7 +33,6 @@ export default function Timer(props) {
 
     function pauseTimer(e) {
         if (pause === "pause") {
-            console.log("hiiii");
             setNewInt(clearInterval(interval));
             console.log("pause timer");
             setPause("unpause");
@@ -45,7 +44,6 @@ export default function Timer(props) {
 
     useEffect(()=> {
         if(pause === "unpause" && interval === undefined) {
-            console.log("hiiiiiiiiiii")
             console.log(msToTime(deltaTime))
         } else if(pause === "pause" && interval === undefined) {
             console.log("the intial time: " + initialTime);
@@ -77,17 +75,21 @@ export default function Timer(props) {
 
     return (
         <div className="body">
-            <button onClick={startTimer}  className="btn btn-dark mx-1">start</button>
-            <button onClick={pauseTimer} className="btn btn-dark mx-1">{pause}</button>
-            <button onClick={stopTimer} className="btn btn-dark mx-1">stop</button>
-
             <div className="container1">
-                <div className = "timer-box">
-                    <h1 id="timer">{`${date}` }</h1>
+            <div className = "timer-box">
+                    <h1 id="timer">{`${date}` }</h1>   
+                </div>  
+                <div className="d-flex justify-content-center">
                     
+                    <button onClick={startTimer}  className="btn btn-lg  btn-dark mx-1">start</button>
+                    <button onClick={pauseTimer} className="btn btn-lg btn-dark mx-1">{pause}</button>
+                    <button onClick={stopTimer} className="btn btn-lg btn-dark mx-1">stop</button>
                 </div>
                 
             </div>
+           
         </div>);
 
 }
+
+

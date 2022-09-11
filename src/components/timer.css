@@ -1,18 +1,22 @@
 .body {
     background-color: #B8A8F0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    margin: auto;
 }
 .container1 {
     display: flex;
     width: 60%;
-    min-height: 80vh;
-    margin: auto;
-    position: relative;
-    justify-content: center;
+    min-height: 50vh;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 24px;
     background-color: white;
+    gap: 10px;
 
 
 }
@@ -27,12 +31,10 @@ h1 {
     margin: 0;
 }
 .timer-box {
-    position: absolute;
     text-align: center;
     background: #785be6;
     background: linear-gradient(321deg, rgba(120,91,230,1) 0%, rgba(164,126,236,1) 74%); 
     width: 75%;
-    bottom: 25%;
     padding: 3% 2%;
     border-radius: 24px;
 }
