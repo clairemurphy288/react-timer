@@ -55,6 +55,7 @@ export default function Timer(props) {
 
     function stopTimer(e) {
         console.log("stop timer");
+        setNewInt(clearInterval(interval));
 
     }
     function msToTime(duration) {
