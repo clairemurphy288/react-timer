@@ -80,7 +80,7 @@ export default function Timer(props) {
             <div className = "timer-box">
                     <h1 id="timer">{`${date}` }</h1>   
                 </div>  
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mb-2">
                     
                     <button onClick={startTimer}  className="btn btn-lg  btn-dark mx-1">start</button>
                     <button onClick={pauseTimer} className="btn btn-lg btn-dark mx-1">{pause}</button>
